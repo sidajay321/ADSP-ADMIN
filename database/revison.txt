@@ -1,0 +1,12 @@
+Revision - not from client side
+
+1. keep seprate account dashborad for all users
+2. In business details - state, District, and default language in dropdown in default language use hindi, english, arabic.
+3. in business product remove prosuct link and add product description
+4. on every page have next button to continue fron that like save and next
+5. do same in services page (according to spoint 4)\
+6. offer page might be change(from client side)
+7. remove business seo page
+8. in blog page please aline in proper ways
+
+(this revision only from anyintech not from client side after project deployed client side revision might be occurs) 
