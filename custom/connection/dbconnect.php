@@ -87,7 +87,7 @@ class Connection {
         if ($this->link != NULL) {
             try {
                 $query = "INSERT INTO  " . $tbName . " (" . $fieldName . ") VALUES(" . $fieldValue . ")";
-//                echo $query;
+                echo $query;
                 $this->link->exec($query);
                 return TRUE;
             } catch (PDOException $ex) {

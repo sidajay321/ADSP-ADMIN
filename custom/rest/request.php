@@ -523,14 +523,16 @@ if (isset($_REQUEST['login_request'])) {
     }
 } else if (isset($_REQUEST['user_business_save'])) {
     try {
-        $ub_id = generateID("tb_user_business", "ub_id", $conn);
         extract($_POST);
+        $ub_id = generateID("tb_user_business", "ub_id", $conn);
+        $ub_password = hash("sha512", $ub_password);
         if ($_FILES["ub_logo"]["name"])
             $ub_logo_result = uploadFile("ub_logo", "../../assets/uploads/", 'ub_logo' . $ub_id);
         if ($_FILES["ub_cover_image"]["name"])
             $ub_cover_result = uploadFile("ub_cover_image", "../../assets/uploads/", 'ub_cover_image' . $ub_id);
-        $fieldsNames = "`ub_id`, `ub_us_id`, `ub_website_url`, `ub_business_name`, `ub_logo`, `ub_cover_image`, `ub_description`, `ub_first_name`, `ub_last_name`, `ub_whatsapp_number`, `ub_alternate_number`, `ub_email`, `ub_address`, `ub_zipcode`, `ub_alternate_email`, `ub_state`, `ub_language`, `ub_google_map_url`, `ub_district`, `ub_business_segment`, `ub_active`, `ub_added_on`";
-        $fieldValue = "'$ub_id', '{$_SESSION['tl_userid']}', '$ub_website_url', '$ub_business_name', '$ub_logo_result', '$ub_cover_result', '$ub_description', '$ub_first_name', '$ub_last_name', '$ub_whatsapp_number', '$ub_alternate_number', '$ub_email', '$ub_address', '$ub_zipcode','$ub_alternate_email','$ub_state','$ub_language','$ub_google_map_url','$ub_district','$ub_business_segment', 'a', '$date'";
+        $fieldsNames = "`ub_id`, `ub_us_id`, `ub_website_url`, `ub_business_name`, `ub_logo`, `ub_cover_image`, `ub_description`, `ub_first_name`, `ub_last_name`, `ub_whatsapp_number`, `ub_alternate_number`, `ub_email`,`ub_password`, `ub_address`, `ub_zipcode`, `ub_alternate_email`, `ub_state`, `ub_language`, `ub_google_map_url`, `ub_district`, `ub_business_segment`, `ub_active`, `ub_added_on`";
+        $fieldValue = "'$ub_id', '{$_SESSION['tl_userid']}', '$ub_website_url', '$ub_business_name', '$ub_logo_result', '$ub_cover_result', '$ub_description', '$ub_first_name', '$ub_last_name', '$ub_whatsapp_number','$ub_alternate_number', '$ub_email','$ub_password', '$ub_address', '$ub_zipcode','$ub_alternate_email','$ub_state','$ub_language','$ub_google_map_url','$ub_district','$ub_business_segment', 'a', '$date'";
+//        echo "<br/><br/>" . $fieldValue . "<br/><br/>";
         if ($conn->insertDataInTable("tb_user_business", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "User Business Data Saved";
             header("location:../../user-business-details.php");

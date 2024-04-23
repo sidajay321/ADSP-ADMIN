@@ -148,7 +148,7 @@ if (isset($_REQUEST['id']))
                                                     <div class="row">
                                                         <div class="col-sm-12 mt-2">
                                                             <label for="ub_first_name" class="form-label">First Name</label>
-                                                            <input type="text" class="form-control" id="ub_first_name" name="ub_first_name" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_first_name'] : "" ?>">                                            
+                                                            <input required type="text" class="form-control" id="ub_first_name" name="ub_first_name" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_first_name'] : "" ?>">                                            
                                                         </div> 
                                                         <div class="col-sm-12 mt-2">
                                                             <label for="ub_last_name" class="form-label">Last Name</label>
@@ -174,15 +174,17 @@ if (isset($_REQUEST['id']))
                                     <div class="row">     
                                         <div class="col-sm-4 mt-2">
                                             <label for="ub_email" class="form-label">Business E-Mail</label>
-                                            <input type="email" class="form-control" id="ub_email" name="ub_email" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_email'] : "" ?>">                                            
+                                            <input required type="email" class="form-control" id="ub_email" name="ub_email" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_email'] : "" ?>">                                            
                                         </div> 
-                                        <div class="col-sm-4 mt-2">
-                                            <label for="ub_password" class="form-label">Password</label>
-                                            <input type="email" class="form-control" id="ub_password" name="ub_password" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_email'] : "" ?>">                                            
-                                        </div>
+                                        <?php if (!isset($_REQUEST['id'])) { ?>
+                                            <div class="col-sm-4 mt-2">
+                                                <label for="ub_password" class="form-label">Password</label>
+                                                <input required type="password" class="form-control" id="ub_password" name="ub_password" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_password'] : "" ?>">                                            
+                                            </div>
+                                        <?php } ?>
                                         <div class="col-sm-4 mt-2">
                                             <label for="ub_address" class="form-label">Business Address</label>
-                                            <input type="text" required class="form-control" id="ub_address" name="ub_address" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_address'] : "" ?>">
+                                            <input required type="text" required class="form-control" id="ub_address" name="ub_address" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_address'] : "" ?>">
                                         </div>
                                         <div class="col-sm-4 mt-2">
                                             <label for="ub_zipcode" class="form-label">Zip Code</label>
