@@ -38,6 +38,7 @@ include './validation.php';
             {
                 opacity: 0;
             }
+
         </style>
         <style>
             body{
@@ -45,6 +46,13 @@ include './validation.php';
             }
         </style>
         <script src="./assets/js/indexscript.js"></script>
+        <style>
+            .select-btn.selected {
+                border: 3px solid royalblue;
+                padding: 2px;
+                border-radius: 10px;
+            }
+        </style>
     </head>
 
     <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
@@ -79,34 +87,23 @@ include './validation.php';
                             if (isset($_REQUEST['id'])) {
                                 $cur = $conn->link->query("SELECT * FROM `tb_user_business` where ub_id=" . $conn->encrypt_decrypt($_REQUEST['id'], 'decrypt'));
                                 $cu_re = $cur->fetch(PDO::FETCH_ASSOC);
+//                                print_r($cu_re);
                             }
                             ?>
                             <div class="col-lg-12">
                                 <br/><h1 class="page-header-title">Business Template</h1><br/>
                                 <form method="post" action="./custom/rest/request.php">                                        
                                     <input type="hidden" readonly class="form-control" id="ub_id" name="ub_id" value="<?= isset($_REQUEST['id']) ? $cu_re['ub_id'] : "" ?>">
+                                    <input type="hidden" name="ub_template_id" id="ub_template_id" value="<?= isset($_REQUEST['id']) ? $cu_re['ub_template_id'] : "" ?>">
                                     <div class="row">    
                                         <div class="col-sm-4 mt-5 text-center">
-                                            <img src="./assets/img/tem1.png" class="w-100 hvr-grow">
-                                        </div>
-                                        <div class="col-sm-4 mt-5 text-center hvr-grow">
-                                            <img src="./assets/img/tem2.png" class="w-100">
-                                        </div>
-                                        <div class="col-sm-4 mt-5 text-center hvr-grow">
-                                            <img src="./assets/img/tem3.png" class="w-100">
-                                        </div>
-                                        <div class="col-sm-4 mt-5 text-center hvr-grow">
-                                            <img src="./assets/img/tem4.png" class="w-100">
-                                        </div>
-                                        <div class="col-sm-4 mt-5 text-center hvr-grow">
-                                            <img src="./assets/img/tem5.png" class="w-100">
-                                        </div>
-                                        <div class="col-sm-4 mt-5 text-center hvr-grow">
-                                            <img src="./assets/img/tem6.png" class="w-100">
+                                            <div class="select-btn <?= isset($_REQUEST['id']) ? $cu_re['ub_template_id'] == 1 ? ' selected' : "" : "" ?>" type="button" value="1" onclick="toggleSelection(this)">
+                                                <img style="border-radius:10px" src="./assets/img/tem7.png" class="w-100 hvr-grow">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-end gap-3 mt-5">                                
-                                        <button type="submit" class="btn btn-primary btn-sm" name="user_save" id="user_save" value="user_save">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary btn-sm" name="user_template_save" id="user_template_save" value="user_template_save">Save Changes</button>
                                         <button type="reset" class="btn btn-primary btn-sm"  name="user_reset" id="user_reset" value="user_reset">Reset</button>
                                     </div>
                                 </form>                        
@@ -151,127 +148,21 @@ include './validation.php';
         <script src="./assets/js/styleswitcher.js"></script>
         <!-- End Style Switcher JS -->
         <script>
-            function previewImage(event) {
-                const file = event.target.files[0];
-                const reader = new FileReader();
 
-                reader.onload = function (event) {
-                    const imgElement = document.getElementById('upload-image-preview');
-                    imgElement.src = event.target.result;
-                }
+                                                function toggleSelection(button) {
+                                                    // Deselect all buttons
+                                                    var buttons = document.querySelectorAll('.select-btn');
+                                                    buttons.forEach(function (btn) {
+                                                        btn.classList.remove('selected');
+                                                        btn.style.border = ''; // Reset border to default
+                                                    });
 
-                reader.readAsDataURL(file);
-            }
-
-            function resetFileInput() {
-                document.getElementById('fileInput').value = '';
-                document.getElementById('upload-image-preview').src = './assets/img/user.png';
-            }
-
-            var bcArr = [];
-<?php
-if (isset($_REQUEST['id'])) {
-    echo "var bd_city=" . $cu_si['bd_city'] . ";";
-    echo "var bd_category=" . $cu_si['bd_category'] . ";";
-    echo "bcArr=" . json_encode($bcArr) . ";";
-}
-?>
-            if (typeof bd_category === 'number') {
-                fetchSubCategory(bd_category);
-            }
-            function fetchCity() {
-                var $retCom = $.ajax({
-                    url: './custom/rest/request.php',
-                    type: 'POST',
-                    data: {fetch_city: 'true'},
-                    async: false
-                }).responseText;
-                $obj = JSON.parse($retCom);
-                $city = "";
-                $cityTable = "";
-                $obj.forEach(function (e, i) {
-                    if (bd_city)
-                        $city += `<option ${bd_city == e.bc_id ? "selected" : ""} value='${e.bc_id}'>${e.bc_name}</option>`;
-                    else
-                        $city += `<option value='${e.bc_id}'>${e.bc_name}</option>`;
-                    $cityTable += `<tr>
-                                                    <td>${i + 1}</td>
-                                                    <td>${e.bc_name}</td>
-                                                    <td>                                            
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        <i class="bi bi-trash"></i>
-                                                    </td>
-                                                </tr>`;
-                });
-                $("#cityTable").html($cityTable);
-                $("#bd_city").html("<option value=''>Select City</option>" + $city);
-            }
-
-            function fetchCategory() {
-                var $retCom = $.ajax({
-                    url: './custom/rest/request.php',
-                    type: 'POST',
-                    data: {fetch_category: 'true'},
-                    async: false
-                }).responseText;
-                $obj = JSON.parse($retCom);
-                $cat = "";
-                $catTable = "";
-                $obj.forEach(function (e, i) {
-                    if (bd_category)
-                        $cat += `<option ${bd_category == e.ca_id ? "selected" : ""} value='${e.ca_id}'>${e.ca_name}</option>`;
-                    else
-                        $cat += `<option value='${e.ca_id}'>${e.ca_name}</option>`;
-                    $catTable += `<tr>
-                                                    <td>${i + 1}</td>
-                                                    <td>${e.ca_name}</td>
-                                                    <td>                                            
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        <i class="bi bi-trash"></i>
-                                                    </td>
-                                                </tr>`;
-                });
-                $("#bd_category").html("<option value=''>Select Category</option>" + $cat);
-                $("#catTable").html($catTable);
-            }
-
-            function fetchSubCategory(bd_category) {
-                console.log(bcArr, "sub category");
-                var $retCom = $.ajax({
-                    url: './custom/rest/request.php',
-                    type: 'POST',
-                    data: {fetch_sub_category: 'true', bd_category: bd_category},
-                    async: false
-                }).responseText;
-                $obj = JSON.parse($retCom);
-                $subcat = "";
-                $obj.forEach(function (e) {
-                    var selected = bcArr.includes(e.ca_id) ? 'selected' : '';
-                    $subcat += `<option  ${selected} value='${e.ca_id}'>${e.ca_name}</option>`;
-                });
-                $("#bd_sub_category").html("<option value=''>Select Sub Category</option>" + $subcat);
-            }
-            $(document).ready(function () {
-                $('.js-example-basic-multiple').select2();
-                fetchCategory();
-                fetchCity();
-                var $retState = $.ajax({
-                    url: './custom/rest/request.php',
-                    type: 'POST',
-                    data: {fetch_state: 'true'},
-                    async: false
-                }).responseText;
-
-                $obj = JSON.parse($retState);
-                $state = "";
-
-                $obj.forEach(function (e) {
-                    $state += `<option value='${e.id}'>${e.name}</option>`;
-                });
-                $("#bd_state").html("<option value=''>Select State</option>" + $state);
-
-            });
-
+                                                    // Select the clicked button
+                                                    button.classList.add('selected');
+                                                    button.style.border = '3px solid royalblue';
+                                                    document.getElementById('ub_template_id').value = button.getAttribute('value');
+                                                    console.log('Button clicked');
+                                                }
         </script>
         <script>
 <?php

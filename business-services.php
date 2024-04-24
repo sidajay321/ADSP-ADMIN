@@ -91,7 +91,7 @@ if (isset($_REQUEST['id']))
                                             <th>Business Icon</th>
                                             <th>Services Name</th>
                                             <th>Services Description</th>                                           
-                                            <th>Action</th>
+                                            <!--<th>Action</th>-->
                                         </tr>
                                     </thead>
                                     <tbody id="catTable">
@@ -107,14 +107,14 @@ if (isset($_REQUEST['id']))
                                             ?>
                                             <tr>
                                                 <td><?= $i + 1 ?></td>
-                                                <td><img height="50" class="rounded-circle" src="./assets/uploads/<?= $_SESSION['us_profile_photo'] ?>" alt="Image Description"></td>
+                                                <td><img height="50" src="./assets/uploads/<?= $cr['bs_image'] ?>" alt="Image Description"></td>                                                                                                
                                                 <td><?= $cr['bs_service_name'] ?></td>
                                                 <td><?= $cr['bs_service_description'] ?></td>                                                
-                                                <td>                                            
+    <!--                                                <td>                                            
                                                     <a href="#?id=<?= $cr['bs_id'] ?>&action=edit"><i class="bi bi-pencil-square"></i></a>
                                                     <a href="#?id=<?= $cr['bs_id'] ?>&action=delete_buisness_details"><i class="bi bi-eye-fill"></i></a>
                                                     <i class="bi bi-trash"></i>
-                                                </td>
+                                                </td>-->
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -133,7 +133,7 @@ if (isset($_REQUEST['id']))
                                         </div> 
                                         <div class="col-sm-6"></div>
                                         <div class="col-sm-6 mt-2">
-                                            <label for="bs_service_description" class="form-label">Services URL</label>
+                                            <label for="bs_service_description" class="form-label">Services Description</label>
                                             <input type="text" required class="form-control" id="bs_service_description" name="bs_service_description">
                                         </div>
                                     </div><br/>

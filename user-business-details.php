@@ -104,7 +104,7 @@ if (isset($_REQUEST['id']))
                                             <div class="row">
                                                 <div class="col-sm-12 mt-2">
                                                     <label for="ub_website_url" class="form-label">Business Website URL</label>
-                                                    <input type="text" class="form-control" id="ub_website_url" name="ub_website_url" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_website_url'] : "" ?>">                                            
+                                                    <input readonly type="text" class="form-control" id="ub_website_url" name="ub_website_url" value="http://user.bizzata.in/<?= isset($_REQUEST['id']) ? $cu_rec['ub_id'] : "" ?>">                                            
                                                 </div> 
                                                 <div class="col-sm-12 mt-2">
                                                     <label for="ub_business_name" class="form-label">Business Name</label>

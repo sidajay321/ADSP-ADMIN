@@ -547,7 +547,11 @@ if (isset($_REQUEST['login_request'])) {
 } else if (isset($_REQUEST['user_business_update'])) {
     try {
         extract($_POST);
-        $setValue = "`ub_website_url`='$ub_website_url', `ub_business_name`='$ub_business_name', `ub_logo`='$ub_logo', `ub_cover_image`='$ub_cover_image', `ub_description`='$ub_description', `ub_first_name`='$ub_first_name', `ub_last_name`='$ub_last_name', `ub_whatsapp_number`='$ub_whatsapp_number', `ub_alternate_number`='$ub_alternate_number', `ub_email`='$ub_email', `ub_address`='$ub_address', `ub_zipcode`='$ub_zipcode', `ub_alternate_email`='$ub_alternate_email', `ub_state`='$ub_state', `ub_language`='$ub_language', `ub_google_map_url`='$ub_google_map_url', `ub_district`='$ub_district', `ub_business_segment`='$ub_business_segment', `ub_added_on`='$date'";
+        if ($_FILES["ub_logo"]["name"])
+            $ub_logo_result = uploadFile("ub_logo", "../../assets/uploads/", 'ub_logo' . $_REQUEST['ub_id']);
+        if ($_FILES["ub_cover_image"]["name"])
+            $ub_cover_result = uploadFile("ub_cover_image", "../../assets/uploads/", 'ub_cover_image' . $_REQUEST['ub_id']);
+        $setValue = "`ub_website_url`='$ub_website_url', `ub_business_name`='$ub_business_name', `ub_logo`='$ub_logo_result', `ub_cover_image`='$ub_cover_result', `ub_description`='$ub_description', `ub_first_name`='$ub_first_name', `ub_last_name`='$ub_last_name', `ub_whatsapp_number`='$ub_whatsapp_number', `ub_alternate_number`='$ub_alternate_number', `ub_email`='$ub_email', `ub_address`='$ub_address', `ub_zipcode`='$ub_zipcode', `ub_alternate_email`='$ub_alternate_email', `ub_state`='$ub_state', `ub_language`='$ub_language', `ub_google_map_url`='$ub_google_map_url', `ub_district`='$ub_district', `ub_business_segment`='$ub_business_segment', `ub_added_on`='$date'";
         $condition = "WHERE `tb_user_business`.`ub_id` = " . $_REQUEST['ub_id'];
 
         if ($conn->updateDataInTable("tb_user_business", $setValue, $condition)) {
@@ -838,5 +842,23 @@ if (isset($_REQUEST['login_request'])) {
     } catch (Exception $ex) {
         $_SESSION['msg'] = "Problem in saving data!";
         header("location:../../business-terms-condition.php");
+    }
+} else if (isset($_REQUEST['user_template_save'])) {
+    try {
+        print_r($_POST);
+        extract($_POST);
+        $setValue = "`ub_template_id` = '$ub_template_id'";
+        $condition = "WHERE `tb_user_business`.`ub_id` = " . $_REQUEST['ub_id'];
+
+        if ($conn->updateDataInTable("tb_user_business", $setValue, $condition)) {
+            $_SESSION['msg'] = "Business Template Saved";
+            header("location:../../business-templates.php");
+        } else {
+            $_SESSION['msg'] = "Problem in saving data!";
+            header("location:../../business-templates.php");
+        }
+    } catch (Exception $ex) {
+        $_SESSION['msg'] = "Problem in saving data!";
+        header("location:../../business-templates.php");
     }
 }

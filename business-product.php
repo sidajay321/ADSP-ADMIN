@@ -92,7 +92,7 @@ if (isset($_REQUEST['id']))
                                             <th>Product Name</th>
                                             <th>Product Description</th>
                                             <th>Product Price</th>                                            
-                                            <th>Action</th>
+                                            <!--<th>Action</th>-->
                                         </tr>
                                     </thead>
                                     <tbody id="catTable">
@@ -112,11 +112,11 @@ if (isset($_REQUEST['id']))
                                                 <td><?= $cr['bp_name'] ?></td>
                                                 <td><?= $cr['bp_description'] ?></td>
                                                 <td><?= $cr['bp_price'] ?></td>                                                                      
-                                                <td>                                            
+<!--                                                <td>                                            
                                                     <a href="#?id=<?= $cr['bp_id'] ?>&action=edit"><i class="bi bi-pencil-square"></i></a>
                                                     <a href="#?id=<?= $cr['bp_id'] ?>&action=delete_buisness_details"><i class="bi bi-eye-fill"></i></a>
                                                     <i class="bi bi-trash"></i>
-                                                </td>
+                                                </td>-->
                                             </tr>
                                         <?php } ?>
 

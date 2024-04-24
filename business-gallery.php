@@ -88,9 +88,8 @@ if (isset($_REQUEST['id']))
                                     <thead class="thead-light">
                                         <tr>                                    
                                             <th>Sr.No.</th>
-                                            <th>Gallery Type</th>
-                                            <th>Gallery URL</th>
-                                            <th>Action</th>
+                                            <th>Gallery Image</th>
+                                            <!--<th>Action</th>-->
                                         </tr>
                                     </thead>
                                     <tbody id="catTable">
@@ -105,13 +104,12 @@ if (isset($_REQUEST['id']))
                                             ?>
                                             <tr>
                                                 <td><?= $i + 1 ?></td>                                                
-                                                <td><?= $cr['bg_product_type'] ?></td>                                                                                                
-                                                <td><?= $cr['bg_product_url'] ?></td>                                                                                                
-                                                <td>                                            
+                                                <td><img height="50" src="./assets/uploads/<?= $cr['bg_image'] ?>" alt="Image Description"></td>                                                                                                
+<!--                                                <td>                                            
                                                     <a href="#?id=<?= $cr['bg_id'] ?>&action=edit"><i class="bi bi-pencil-square"></i></a>
                                                     <a href="#?id=<?= $cr['bg_id'] ?>&action=delete_buisness_details"><i class="bi bi-eye-fill"></i></a>
                                                     <i class="bi bi-trash"></i>
-                                                </td>
+                                                </td>-->
                                             </tr>
                                         <?php } ?>
                                     </tbody>
@@ -123,7 +121,7 @@ if (isset($_REQUEST['id']))
                                 <br/><h1 class="page-header-title">Add Business Gallery</h1><br/>
                                 <form method="post" action="./custom/rest/request.php" enctype="multipart/form-data">                                        
                                     <input type="hidden" readonly class="form-control" id="ub_id" name="ub_id" value="<?= isset($_REQUEST['id']) ? $cu_re['ub_id'] : "" ?>">
-                                    <div class="row">     
+<!--                                    <div class="row">     
                                         <div class="col-sm-6 mt-2">
                                             <label for="bg_product_type" class="form-label">Gallery Type</label>
                                             <input type="text" class="form-control" id="bg_product_type" name="bg_product_type">                                            
@@ -133,7 +131,7 @@ if (isset($_REQUEST['id']))
                                             <label for="bg_product_url" class="form-label">Gallery URL</label>
                                             <input type="text" required class="form-control" id="bg_product_url" name="bg_product_url">
                                         </div>
-                                    </div><br/>
+                                    </div><br/>-->
                                     <div class="row">    
                                         <div class="col-sm-4 text-center">
                                             <img src="./assets/img/placehoder1.jpg" id="upload-image-preview" class="w-50"><br/>
