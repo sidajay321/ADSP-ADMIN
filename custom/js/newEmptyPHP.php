@@ -1,15 +1,14 @@
 <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
     <div class="navbar-nav-wrap">
         <!-- Logo -->
-        <a class="navbar-brand" href="./index.php" aria-label="Front">
-            <h3 style="color:#696CFF;">Shopeemart</h3>
-<!--            <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
+        <a class="navbar-brand" href="./index.html" aria-label="Front">
+            <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
             <img class="navbar-brand-logo" src="./assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
             <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
-            <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">-->
+            <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
         </a>
         <!-- End Logo -->
-
+        <a href="../rest/request.php"></a>
         <div class="navbar-nav-wrap-content-start">
             <!-- Navbar Vertical Toggle -->
             <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
@@ -28,7 +27,7 @@
                             <i class="bi-search"></i>
                         </div>
 
-                        <input type="search" class="js-form-search form-control" placeholder="Search in Shopeemart" aria-label="Search in front" data-hs-form-search-options='{
+                        <input type="search" class="js-form-search form-control" placeholder="Search in front" aria-label="Search in front" data-hs-form-search-options='{
                                "clearIcon": "#clearSearchResultsIcon",
                                "dropMenuElement": "#searchDropdownMenu",
                                "dropMenuOffset": 20,
@@ -73,10 +72,10 @@
                             <span class="dropdown-header">Recent searches</span>
 
                             <div class="dropdown-item bg-transparent text-wrap">
-                                <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.php">
+                                <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.html">
                                     Gulp <i class="bi-search ms-1"></i>
                                 </a>
-                                <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.php">
+                                <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.html">
                                     Notification panel <i class="bi-search ms-1"></i>
                                 </a>
                             </div>
@@ -85,7 +84,7 @@
 
                             <span class="dropdown-header">Tutorials</span>
 
-                            <a class="dropdown-item" href="./index.php">
+                            <a class="dropdown-item" href="./index.html">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <span class="icon icon-soft-dark icon-xs icon-circle">
@@ -99,7 +98,7 @@
                                 </div>
                             </a>
 
-                            <a class="dropdown-item" href="./index.php">
+                            <a class="dropdown-item" href="./index.html">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <span class="icon icon-soft-dark icon-xs icon-circle">
@@ -117,7 +116,7 @@
 
                             <span class="dropdown-header">Members</span>
 
-                            <a class="dropdown-item" href="./index.php">
+                            <a class="dropdown-item" href="./index.html">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <img class="avatar avatar-xs avatar-circle" src="./assets/img/160x160/img10.jpg" alt="Image Description">
@@ -128,7 +127,7 @@
                                 </div>
                             </a>
 
-                            <a class="dropdown-item" href="./index.php">
+                            <a class="dropdown-item" href="./index.html">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <img class="avatar avatar-xs avatar-circle" src="./assets/img/160x160/img3.jpg" alt="Image Description">
@@ -139,7 +138,7 @@
                                 </div>
                             </a>
 
-                            <a class="dropdown-item" href="./index.php">
+                            <a class="dropdown-item" href="./index.html">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-shrink-0">
                                         <div class="avatar avatar-xs avatar-soft-info avatar-circle">
@@ -155,7 +154,7 @@
                         <!-- End Body -->
 
                         <!-- Footer -->
-                        <a class="card-footer text-center" href="./index.php">
+                        <a class="card-footer text-center" href="./index.html">
                             See all results <i class="bi-chevron-right small"></i>
                         </a>
                         <!-- End Footer -->
@@ -244,7 +243,7 @@
                                                                     <label class="form-check-label" for="notificationCheck1"></label>
                                                                     <span class="form-check-stretched-bg"></span>
                                                                 </div>
-                                                                <img class="avatar avatar-sm avatar-circle" src="./favicon.ico" alt="Image Description">
+                                                                <img class="avatar avatar-sm avatar-circle" src="./assets/img/160x160/img3.jpg" alt="Image Description">
                                                             </div>
                                                         </div>
                                                         <!-- End Col -->
@@ -310,7 +309,7 @@
                                                                     <span class="form-check-stretched-bg"></span>
                                                                 </div>
                                                                 <div class="avatar avatar-sm avatar-circle">
-                                                                    <img class="avatar-img" src="./favicon.ico" alt="Image Description">
+                                                                    <img class="avatar-img" src="./assets/img/160x160/img10.jpg" alt="Image Description">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -342,7 +341,7 @@
                                                                     <span class="form-check-stretched-bg"></span>
                                                                 </div>
                                                                 <div class="avatar avatar-sm avatar-circle">
-                                                                    <img class="avatar-img" src="./favicon.ico" alt="Image Description">
+                                                                    <img class="avatar-img" src="./assets/svg/brands/google-icon.svg" alt="Image Description">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -374,7 +373,7 @@
                                                                     <span class="form-check-stretched-bg"></span>
                                                                 </div>
                                                                 <div class="avatar avatar-sm avatar-circle">
-                                                                    <img class="avatar-img" src="./favicon.ico" alt="Image Description">
+                                                                    <img class="avatar-img" src="./assets/img/160x160/img7.jpg" alt="Image Description">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -444,7 +443,7 @@
                                                                     <span class="form-check-stretched-bg"></span>
                                                                 </div>
                                                                 <div class="avatar avatar-sm avatar-circle">
-                                                                    <img class="avatar-img" src="./favicon.ico" alt="Image Description">
+                                                                    <img class="avatar-img" src="./assets/img/160x160/img5.jpg" alt="Image Description">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -508,7 +507,7 @@
                                                                     <span class="form-check-stretched-bg"></span>
                                                                 </div>
                                                                 <div class="avatar avatar-sm avatar-circle">
-                                                                    <img class="avatar-img" src="./favicon.ico" alt="Image Description">
+                                                                    <img class="avatar-img" src="./assets/img/160x160/img8.jpg" alt="Image Description">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -579,14 +578,124 @@
                     <!-- End Notification -->
                 </li>
 
+                <li class="nav-item d-none d-sm-inline-block">
+                    <!-- Apps -->
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-icon btn-ghost-secondary rounded-circle" id="navbarAppsDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                            <i class="bi-app-indicator"></i>
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-end dropdown-card navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="navbarAppsDropdown" style="width: 25rem;">
+                            <div class="card">
+                                <!-- Header -->
+                                <div class="card-header">
+                                    <h4 class="card-title">Web apps &amp; services</h4>
+                                </div>
+                                <!-- End Header -->
+
+                                <!-- Body -->
+                                <div class="card-body card-body-height">
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/atlassian-icon.svg" alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 text-truncate ms-3">
+                                                <h5 class="mb-0">Atlassian</h5>
+                                                <p class="card-text text-body">Security and control across Cloud</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/slack-icon.svg" alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 text-truncate ms-3">
+                                                <h5 class="mb-0">Slack <span class="badge bg-primary rounded-pill text-uppercase ms-1">Try</span></h5>
+                                                <p class="card-text text-body">Email collaboration software</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/google-webdev-icon.svg" alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 text-truncate ms-3">
+                                                <h5 class="mb-0">Google webdev</h5>
+                                                <p class="card-text text-body">Work involved in developing a website</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/brands/frontapp-icon.svg" alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 text-truncate ms-3">
+                                                <h5 class="mb-0">Frontapp</h5>
+                                                <p class="card-text text-body">The inbox for teams</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <img class="avatar avatar-xs avatar-4x3" src="./assets/svg/illustrations/review-rating-shield.svg" alt="Image Description">
+                                            </div>
+                                            <div class="flex-grow-1 text-truncate ms-3">
+                                                <h5 class="mb-0">HS Support</h5>
+                                                <p class="card-text text-body">Customer service and support</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item" href="#">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0">
+                                                <div class="avatar avatar-sm avatar-soft-dark">
+                                                    <span class="avatar-initials"><i class="bi-grid"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1 text-truncate ms-3">
+                                                <h5 class="mb-0">More Front products</h5>
+                                                <p class="card-text text-body">Check out more HS products</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- End Body -->
+
+                                <!-- Footer -->
+                                <a class="card-footer text-center" href="#">
+                                    View all apps <i class="bi-chevron-right"></i>
+                                </a>
+                                <!-- End Footer -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Apps -->
+                </li>
+
+                <li class="nav-item d-none d-sm-inline-block">
+                    <!-- Activity -->
+                    <button class="btn btn-ghost-secondary btn-icon rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasActivityStream" aria-controls="offcanvasActivityStream">
+                        <i class="bi-x-diamond"></i>
+                    </button>
+                    <!-- Activity -->
+                </li>
 
                 <li class="nav-item">
                     <!-- Account -->
                     <div class="dropdown">
                         <a class="navbar-dropdown-account-wrapper" href="javascript:;" id="accountNavbarDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside" data-bs-dropdown-animation>
                             <div class="avatar avatar-sm avatar-circle">
-                                <i class="bi bi-person" style="font-size: 30px;"></i>
-                                <!--<img class="avatar-img" src="./assets/uploads/<?= $_SESSION['us_profile_photo'] ?>" alt="Image Description">-->
+                                <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
                                 <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                             </div>
                         </a>
@@ -595,23 +704,84 @@
                             <div class="dropdown-item-text">
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <!--<img class="avatar-img" src="./assets/uploads/<?= $_SESSION['us_profile_photo'] ?>" alt="Image Description">-->
-                                        <i class="bi bi-person" style="font-size: 30px;"></i>
+                                        <img class="avatar-img" src="./assets/img/160x160/img6.jpg" alt="Image Description">
                                     </div>
                                     <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-0"><?= $_SESSION['tl_name'] ?></h5>
-                                        <!--<p class="card-text text-body"><?= $_SESSION[''] ?></p>-->
+                                        <h5 class="mb-0">Mark Williams</h5>
+                                        <p class="card-text text-body">mark@site.com</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="dropdown-divider"></div>                           
+                            <div class="dropdown-divider"></div>
+
+                            <!-- Dropdown -->
+                            <div class="dropdown">
+                                <a class="navbar-dropdown-submenu-item dropdown-item dropdown-toggle" href="javascript:;" id="navSubmenuPagesAccountDropdown1" data-bs-toggle="dropdown" aria-expanded="false">Set status</a>
+
+                                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu" aria-labelledby="navSubmenuPagesAccountDropdown1">
+                                    <a class="dropdown-item" href="#">
+                                        <span class="legend-indicator bg-success me-1"></span> Available
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <span class="legend-indicator bg-danger me-1"></span> Busy
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <span class="legend-indicator bg-warning me-1"></span> Away
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#"> Reset status
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End Dropdown -->
 
                             <a class="dropdown-item" href="#">Profile &amp; account</a>
+                            <a class="dropdown-item" href="#">Settings</a>
 
                             <div class="dropdown-divider"></div>
 
-                            <a class="dropdown-item" href="./logout.php">Sign out</a>
+                            <a class="dropdown-item" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <div class="avatar avatar-sm avatar-dark avatar-circle">
+                                            <span class="avatar-initials">HS</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1 ms-2">
+                                        <h5 class="mb-0">Htmlstream <span class="badge bg-primary rounded-pill text-uppercase ms-1">PRO</span></h5>
+                                        <span class="card-text">hs.example.com</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <!-- Dropdown -->
+                            <div class="dropdown">
+                                <a class="navbar-dropdown-submenu-item dropdown-item dropdown-toggle" href="javascript:;" id="navSubmenuPagesAccountDropdown2" data-bs-toggle="dropdown" aria-expanded="false">Customization</a>
+
+                                <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless navbar-dropdown-sub-menu" aria-labelledby="navSubmenuPagesAccountDropdown2">
+                                    <a class="dropdown-item" href="#">
+                                        Invite people
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        Analytics
+                                        <i class="bi-box-arrow-in-up-right"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        Customize Front
+                                        <i class="bi-box-arrow-in-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End Dropdown -->
+
+                            <a class="dropdown-item" href="#">Manage team</a>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="#">Sign out</a>
                         </div>
                     </div>
                     <!-- End Account -->

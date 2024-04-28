@@ -131,7 +131,10 @@ include './validation.php';
                                     <th>Business Name</th>
                                     <th>City</th>
                                     <th>Category</th>
-                                    <th>Multiple Category</th>
+                                    <th>Multiple Category</th>                                    
+                                    <th>Mobile Number</th>
+                                    <th>Email<br/>(Username)</th>
+                                    <th>Password</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -141,13 +144,18 @@ include './validation.php';
                                 $cu = $conn->link->query("SELECT * FROM tb_business_details tb JOIN tb_buisness_cities tbc ON tb.bd_city=tbc.bc_id JOIN tb_category tca ON tb.bd_category=tca.ca_id");
                                 $cu_rec = $cu->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($cu_rec as $cr) {
+//                                    echo "SELECT * FROM tb_buisness_category tbc JOIN tb_category tc ON tbc.bca_bc_id=tc.ca_id where bca_bd_id={$cr['bd_id']}";
                                     $sc = $conn->link->query("SELECT * FROM tb_buisness_category tbc JOIN tb_category tc ON tbc.bca_bc_id=tc.ca_id where bca_bd_id={$cr['bd_id']}");
                                     $sc_rec = $sc->fetchAll(PDO::FETCH_ASSOC);
+
+                                    $scd = $conn->link->query("SELECT * FROM tb_user_business where ub_us_id={$cr['bd_id']}");
+                                    $scd_rec = $scd->fetch(PDO::FETCH_ASSOC);
+//                                    print_r($sc_rec);
                                     ?>
                                     <tr>
                                         <td><?= $cr['bd_business_name'] ?></td>
                                         <td><?= $cr['bc_name'] ?></td>
-                                        <td><?= $cr['ca_name'] ?></td>
+                                        <td><?= $cr['ca_name'] ?></td>                                        
                                         <td>
                                             <?php
                                             foreach ($sc_rec as $subcategory) {
@@ -156,6 +164,15 @@ include './validation.php';
                                                 <?php
                                             }
                                             ?>
+                                        </td>
+                                        <td><?= $scd_rec['ub_whatsapp_number'] ?></td>
+                                        <td style="text-transform: lowercase !important;"><?= $scd_rec['ub_email'] ?></td>
+                                        <td>
+                                            <span id="passwordPlaceholder">*************</span>
+                                            <button class="btn" onmousedown="showPassword('<?= $conn->encrypt_decrypt($scd_rec['ub_password'], 'decrypt') ?>')" onmouseup="hidePassword()">
+                                                <i id="showIcon" class="bi bi-eye"></i>
+                                                <i id="hideIcon" class="bi bi-eye-slash" style="display: none;"></i>
+                                            </button>
                                         </td>
                                         <td>                                            
                                             <a href="./add-buisness.php?id=<?= $cr['bd_id'] ?>&action=edit"><i class="bi bi-pencil-square"></i></a>
@@ -214,8 +231,34 @@ include './validation.php';
         <script src="./assets/js/hs.theme-appearance-charts.js"></script>
         <!-- JS Plugins Init. -->
         <script src="./assets/js/initialization.js"></script>
+        <script>
+
+        </script>
+
         <!-- Style Switcher JS -->
         <script src="./assets/js/styleswitcher.js"></script>
         <!-- End Style Switcher JS -->
+        <script>
+                                            var passwordPlaceholder = document.getElementById("passwordPlaceholder");
+                                            var originalPassword = passwordPlaceholder.textContent;
+                                            var showIcon = document.getElementById("showIcon");
+                                            var hideIcon = document.getElementById("hideIcon");
+                                            var decryptedPassword = null;
+
+                                            function showPassword(password) {
+                                                if (decryptedPassword === null) {
+                                                    decryptedPassword = password;
+                                                }
+                                                passwordPlaceholder.textContent = decryptedPassword;
+                                                showIcon.style.display = "none";
+                                                hideIcon.style.display = "inline";
+                                            }
+
+                                            function hidePassword() {
+                                                passwordPlaceholder.textContent = originalPassword;
+                                                showIcon.style.display = "inline";
+                                                hideIcon.style.display = "none";
+                                            }
+        </script>
     </body>
 </html>

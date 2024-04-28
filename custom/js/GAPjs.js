@@ -1,6 +1,6 @@
 /*document.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-}, false);*/
+ e.preventDefault();
+ }, false);*/
 /*=========Create XMLHttpRequste Object ===============*/
 function createAjaxObject()
 {
@@ -299,9 +299,9 @@ function showAlertMessage($msg, $type)
         size: BootstrapDialog.SIZE_SMALL
     });
 }
-function JSONObjectToOptionTagByGAP($JSONObj,$emptyMsg)
+function JSONObjectToOptionTagByGAP($JSONObj, $emptyMsg)
 {
-    $returnValue = '<option value="">'+$emptyMsg+'</option>';
+    $returnValue = '<option value="">' + $emptyMsg + '</option>';
     for ($i = 0; $i < $JSONObj.length; $i++)
     {
         $returnValue += '<option value="' + $JSONObj[$i].comboID + '">';
@@ -322,10 +322,10 @@ function JSONObjectToSelectOptionTagByGAP($JSONObj, $value)
     }
     return $returnValue;
 }
-function JSONStringToOptionTagByGAP($JSONString,$emptyMsg)
+function JSONStringToOptionTagByGAP($JSONString, $emptyMsg)
 {
     $JSONObj = JSON.parse($JSONString);
-    return JSONObjectToOptionTagByGAP($JSONObj,$emptyMsg);
+    return JSONObjectToOptionTagByGAP($JSONObj, $emptyMsg);
 }
 function JSONStringToSelectedOptionTagByGAP($JSONString, $value)
 {
@@ -343,6 +343,22 @@ function loadMenuPageInDivByGAP($parent, $page)
         window.scrollTo(0, 0);
         $("#waitingDiv").hide();
     });
+}
+
+function checkValueInTable(tbName, fieldName, field) {
+    const retCon = $.ajax({
+        url: './custom/rest/request.php',
+        type: 'POST',
+        data: {check_code: 'true', tb_name: tbName, field_name: fieldName, field_value: field.value},
+        async: false
+    }).responseText;
+    if (retCon)
+    {
+        alert('This value already exits!');
+        field.value = "";
+        field.focus();
+    }
+
 }
 /*Code For Date validation
  * var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;

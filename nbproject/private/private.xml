@@ -4,11 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp64/www/adsp/user-business-details.php</file>
-            <file>file:/C:/wamp64/www/adsp/business-profile.php</file>
             <file>file:/C:/wamp64/www/adsp/custom/rest/request.php</file>
+            <file>file:/C:/wamp64/www/adsp/buisness.php</file>
             <file>file:/C:/wamp64/www/adsp/includes/navbar.php</file>
-            <file>file:/C:/wamp64/www/adsp/business-templates.php</file>
-            <file>file:/C:/wamp64/www/adsp/custom/rest/api.php</file>
+            <file>file:/C:/wamp64/www/adsp/add-buisness.php</file>
+            <file>file:/C:/wamp64/www/adsp/user-account-details.php</file>
         </group>
     </open-files>
 </project-private>

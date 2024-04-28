@@ -84,7 +84,6 @@ if (isset($_REQUEST['getCategoryData'])) {
         echo '{"status": false, "msg": "Correct ID not provided"}';
         exit;
     }
-
     try {
         $businessId = $_REQUEST['businessId'];
         $stmt = $conn->link->query("SELECT * FROM `tb_user_business` where ub_id='$businessId'");

@@ -122,7 +122,7 @@ if (isset($_REQUEST['login_request'])) {
         $ui = $_REQUEST['username'];
     if ((isset($_REQUEST['password'])) && (filter_var($_REQUEST['password'], FILTER_SANITIZE_STRING))) {
         $pw = $_REQUEST['password'];
-        $pass = hash("sha512", $pw);
+        $pass = $conn->encrypt_decrypt($pw, 'encrypt');
     }
     if ($_REQUEST['bd_type'] == 'admin')
         $stmt = $conn->link->prepare("SELECT * FROM tb_user_login where ul_username=:ui and ul_password=:pw");
@@ -160,6 +160,7 @@ if (isset($_REQUEST['login_request'])) {
                 $_SESSION['tl_name'] = $re_th['ub_first_name'] . " " . $re_th['ub_last_name'];
                 $_SESSION['tl_status'] = $re_th['ub_active'];
                 $_SESSION['us_profile_photo'] = $re_th['ub_logo'];
+                $_SESSION['ub_id'] = $re_th['ub_id'];
                 header("location:../../user-dashboard.php?id=" . $conn->encrypt_decrypt($re_th['ub_id'], 'encrypt'));
             } else {
                 $_SESSION['msg'] = "Invalid Id OR/AND Password!";
@@ -369,6 +370,20 @@ if (isset($_REQUEST['login_request'])) {
         $businessID = "BI{$bd_id}BN{$bd_city}{$bd_category}";
         $fieldsNames = "`bd_user_id`,`bd_business_name`,`bd_business_id`,`bd_url`,`bd_city`,`bd_category`,`bd_meta_title`,`bd_meta_keywords`,`bd_meta_description`,`bd_added_date`";
         $fieldValue = "'{$_SESSION['tl_userid']}','$bd_business_name','$businessID','$bd_url','$bd_city','$bd_category','$bd_meta_title','$bd_meta_keywords','$bd_meta_description','$date'";
+
+        $ub_id = generateID("tb_user_business", "ub_id", $conn);
+        $ub_password = $conn->encrypt_decrypt($ub_password, 'encrypt');
+        if ($_FILES["ub_logo"]["name"])
+            $ub_logo_result = uploadFile("ub_logo", "../../assets/uploads/", 'ub_logo' . $ub_id);
+        if ($_FILES["ub_cover_image"]["name"])
+            $ub_cover_result = uploadFile("ub_cover_image", "../../assets/uploads/", 'ub_cover_image' . $ub_id);
+
+
+        $fieldsNames1 = "`ub_id`, `ub_us_id`, `ub_business_name`, `ub_logo`, `ub_cover_image`, `ub_description`, `ub_whatsapp_number`, `ub_alternate_number`, `ub_email`,`ub_password`, `ub_address`, `ub_zipcode`, `ub_alternate_email`, `ub_state`, `ub_language`, `ub_google_map_url`, `ub_district`, `ub_business_segment`, `ub_active`, `ub_added_on`";
+        $fieldValue1 = "'$ub_id', '$bd_id', '$bd_business_name', '$ub_logo_result', '$ub_cover_result', '$ub_description', '$ub_whatsapp_number','$ub_alternate_number', '$ub_email','$ub_password', '$ub_address', '$ub_zipcode','$ub_alternate_email','$ub_state','$ub_language','$ub_google_map_url','$ub_district','$ub_business_segment', 'a', '$date'";
+
+        $conn->insertDataInTable("tb_user_business", $fieldsNames1, $fieldValue1);
+
         if ($conn->insertDataInTable("tb_business_details", $fieldsNames, $fieldValue)) {
 
             if (!file_exists($sitemapPath)) {
@@ -419,6 +434,17 @@ if (isset($_REQUEST['login_request'])) {
         }
         $setValue = "`bd_business_name` = '$bd_business_name', `bd_url` = '$bd_url', `bd_city` = '$bd_city', `bd_category` = '$bd_category', `bd_meta_title` = '$bd_meta_title', `bd_meta_keywords` = '$bd_meta_keywords', `bd_meta_description` = '$bd_meta_description'";
         $condition = "WHERE `tb_business_details`.`bd_id` = $bd_id";
+
+        if ($_FILES["ub_logo"]["name"])
+            $ub_logo_result = uploadFile("ub_logo", "../../assets/uploads/", 'ub_logo' . $_REQUEST['ub_id']);
+        if ($_FILES["ub_cover_image"]["name"])
+            $ub_cover_result = uploadFile("ub_cover_image", "../../assets/uploads/", 'ub_cover_image' . $_REQUEST['ub_id']);
+
+        $setValue = "`ub_website_url`='$ub_website_url', `ub_business_name`='$bd_business_name', `ub_logo`='$ub_logo_result', `ub_cover_image`='$ub_cover_result', `ub_description`='$ub_description', `ub_whatsapp_number`='$ub_whatsapp_number', `ub_alternate_number`='$ub_alternate_number', `ub_email`='$ub_email', `ub_address`='$ub_address', `ub_zipcode`='$ub_zipcode', `ub_alternate_email`='$ub_alternate_email', `ub_state`='$ub_state', `ub_language`='$ub_language', `ub_google_map_url`='$ub_google_map_url', `ub_district`='$ub_district', `ub_business_segment`='$ub_business_segment', `ub_added_on`='$date'";
+        $condition = "WHERE `tb_user_business`.`ub_id` = " . $_REQUEST['ub_id'];
+
+        $conn->updateDataInTable("tb_user_business", $setValue, $condition);
+
         //fetch old url
         $cu_ci_si = $conn->link->query("SELECT * FROM tb_business_details where bd_id=" . $bd_id);
         $cu_si = $cu_ci_si->fetch(PDO::FETCH_ASSOC);
@@ -504,10 +530,10 @@ if (isset($_REQUEST['login_request'])) {
     try {
         $us_id = generateID("tb_user", "us_id", $conn);
         extract($_POST);
-        $us_password = hash("sha512", $us_password);
+        $us_password = $conn->encrypt_decrypt($ub_password, 'encrypt');
         if ($_FILES["us_profile_photo"]["name"])
             $us_profile_photo_result = uploadFile("us_profile_photo", "../../assets/uploads/", 'us_profile' . $us_id);
-        $ub_password = hash("sha512", $ub_password);
+        $ub_password = $conn->encrypt_decrypt($ub_password, 'encrypt');
         $fieldsNames = "`us_id`,`us_profile_photo`, `us_first_name`, `us_last_name`, `us_email`,`ub_password`, `us_organisation`, `us_phone_number`, `us_address`, `us_state`, `us_zipcode`, `us_country`, `us_language`, `us_timezone`, `us_currency`,`us_password`, `us_active`, `us_added_date`";
         $fieldValue = "'$us_id', '$us_profile_photo_result', '$us_first_name', '$us_last_name', '$us_email','$ub_password', '$us_organisation', '$us_phone_number', '$us_address', '$us_state', '$us_zipcode', '$us_country', '$us_language', '$us_timezone', '$us_currency','$us_password', 'a', '$date'";
         if ($conn->insertDataInTable("tb_user", $fieldsNames, $fieldValue)) {
@@ -525,7 +551,8 @@ if (isset($_REQUEST['login_request'])) {
     try {
         extract($_POST);
         $ub_id = generateID("tb_user_business", "ub_id", $conn);
-        $ub_password = hash("sha512", $ub_password);
+        $ub_password = $conn->encrypt_decrypt($ub_password, 'encrypt');
+        //hash("sha512", $ub_password);
         if ($_FILES["ub_logo"]["name"])
             $ub_logo_result = uploadFile("ub_logo", "../../assets/uploads/", 'ub_logo' . $ub_id);
         if ($_FILES["ub_cover_image"]["name"])
@@ -860,5 +887,9 @@ if (isset($_REQUEST['login_request'])) {
     } catch (Exception $ex) {
         $_SESSION['msg'] = "Problem in saving data!";
         header("location:../../business-templates.php");
+    }
+} elseif (isset($_REQUEST['check_code'])) {
+    if ($conn->isRecordExsistInTable($_REQUEST['tb_name'], "WHERE {$_REQUEST['field_name']} = '{$_REQUEST['field_value']}'")) {
+        echo true;
     }
 }

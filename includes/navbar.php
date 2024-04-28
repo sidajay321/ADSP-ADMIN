@@ -31,10 +31,10 @@
                             <span class="nav-link-title">Dashboards</span>
                         </a>
                         <?php if ($_SESSION['type'] == 'user') { ?>
-                            <a class="nav-link  <?= $ac == 6 ? "active" : "" ?>" href="./user-account-details.php">
-                                <i class="bi-people nav-icon"></i>
-                                <span class="nav-link-title">Account Setting</span>
-                            </a>
+            <!--                            <a class="nav-link  <?= $ac == 6 ? "active" : "" ?>" href="./user-account-details.php">
+                        <i class="bi-people nav-icon"></i>
+                        <span class="nav-link-title">Account Setting</span>
+                    </a>-->
                         <?php } ?>
                     </div>
                     <!-- End Collapse -->
@@ -73,31 +73,23 @@
                                 <span class="nav-link-title">Category</span>
                             </a>
                         </div>
-                        <div class="nav-item">
-                            <a class="nav-link <?= $ac == 2 ? "active" : "" ?>" href="./buisness.php" data-placement="left">
-                                <i class="bi-receipt nav-icon"></i>
-                                <span class="nav-link-title">Overview</span>
-                            </a>
-                        </div> 
-                        <div class="nav-item">
-                            <a class="nav-link <?= $ac == 3 ? "active" : "" ?>" href="./add-buisness.php" data-placement="left">
-                                <i class="bi-receipt nav-icon"></i>
-                                <span class="nav-link-title">Business</span>
-                            </a>
-                        </div> 
+                        <!--                        <div class="nav-item">
+                                                        <a class="nav-link <?= $ac == 9 ? "active" : "" ?>" href="./user-business-details.php" data-placement="left">
+                                                            <i class="bi-receipt nav-icon"></i>
+                                                            <span class="nav-link-title">Business Details</span>
+                                                        </a>                            
+                                                    </div>-->
                     <?php } ?>
                     <?php if ($_SESSION['type'] == 'user') { ?>
-                        <div class="nav-item">
-                            <a class="nav-link dropdown-toggle <?= $ac == 7 || $ac == 8 || $ac == 9 || $ac == 10 || $ac == 11 || $ac == 12 || $ac == 13 || $ac == 14 || $ac == 15 || $ac == 16 || $ac == 17 || $ac == 18 || $ac == 19 || $ac == 20 || $ac == 21 || $ac == 22 || $ac == 23 ? "active" : "" ?>" href="#navbarVerticalMenuPagesUsersMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesUsersMenu">
-                                <i class="bi-people nav-icon"></i>
-                                <span class="nav-link-title">My Business</span>
-                            </a>
-                            <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse <?= $ac == 7 || $ac == 8 || $ac == 9 || $ac == 10 || $ac == 11 || $ac == 12 || $ac == 13 || $ac == 14 || $ac == 15 || $ac == 16 || $ac == 17 || $ac == 18 || $ac == 19 || $ac == 20 || $ac == 21 || $ac == 22 || $ac == 23 ? "" : "collapse" ?> " data-bs-parent="#navbarVerticalMenuPagesMenu">                                
-                                <a class="nav-link <?= $ac == 8 ? "active" : "" ?>" href="./business-profile.php">My Profile</a>
-                                <a class="nav-link <?= $ac == 9 ? "active" : "" ?>" href="./user-business-details.php<?= isset($_SESSION['ub_id']) ? "?id=" . $_SESSION['ub_id'] : "" ?>">Business Details</a>
-                                <!--<a class="nav-link <?= $ac == 8 ? "active" : "" ?>" href="./business-profile.php">My Profile</a>-->
-                            </div>
-                        </div>
+                        <!--                        <div class="nav-item">
+                                                        <a class="nav-link dropdown-toggle <?= $ac == 7 || $ac == 8 || $ac == 9 || $ac == 10 || $ac == 11 || $ac == 12 || $ac == 13 || $ac == 14 || $ac == 15 || $ac == 16 || $ac == 17 || $ac == 18 || $ac == 19 || $ac == 20 || $ac == 21 || $ac == 22 || $ac == 23 ? "active" : "" ?>" href="#navbarVerticalMenuPagesUsersMenu" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuPagesUsersMenu" aria-expanded="false" aria-controls="navbarVerticalMenuPagesUsersMenu">
+                                                            <i class="bi-people nav-icon"></i>
+                                                            <span class="nav-link-title">My Business</span>
+                                                        </a>
+                                                        <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse <?= $ac == 7 || $ac == 8 || $ac == 9 || $ac == 10 || $ac == 11 || $ac == 12 || $ac == 13 || $ac == 14 || $ac == 15 || $ac == 16 || $ac == 17 || $ac == 18 || $ac == 19 || $ac == 20 || $ac == 21 || $ac == 22 || $ac == 23 ? "" : "collapse" ?> " data-bs-parent="#navbarVerticalMenuPagesMenu">                                                                
+                            
+                                                        </div>
+                                                    </div>-->
                     <?php } ?>
                     <?php if ($_SESSION['type'] == 'business') { ?>
                         <div class="nav-item">
@@ -107,6 +99,7 @@
                             </a>
                             <div id="navbarVerticalMenuPagesUsersMenu" class="nav-collapse <?= $ac == 7 || $ac == 8 || $ac == 9 || $ac == 10 || $ac == 11 || $ac == 12 || $ac == 13 || $ac == 14 || $ac == 15 || $ac == 16 || $ac == 17 || $ac == 18 || $ac == 19 || $ac == 20 || $ac == 21 || $ac == 22 || $ac == 23 ? "" : "collapse" ?> " data-bs-parent="#navbarVerticalMenuPagesMenu">
                                 <a class="nav-link <?= $ac == 7 ? "active" : "" ?>" href="./business-templates.php<?= isset($_SESSION['ub_id']) ? "?id=" . $_SESSION['ub_id'] : "" ?>">Templates</a>                                
+                                <!--<a class="nav-link <?= $ac == 8 ? "active" : "" ?>" href="./business-profile.php">My Profile</a>-->                                    
                                 <a class="nav-link <?= $ac == 9 ? "active" : "" ?>" href="./user-business-details.php<?= isset($_SESSION['ub_id']) ? "?id=" . $_SESSION['ub_id'] : "" ?>">Business Details</a>
                                 <a class="nav-link <?= $ac == 10 ? "active" : "" ?>" href="./social-media.php<?= isset($_SESSION['ub_id']) ? "?id=" . $_SESSION['ub_id'] : "" ?>">Social Media</a>                                
                                 <a class="nav-link <?= $ac == 11 ? "active" : "" ?>" href="./business-product.php<?= isset($_SESSION['ub_id']) ? "?id=" . $_SESSION['ub_id'] : "" ?>">Products</a>

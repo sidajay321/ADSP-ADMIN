@@ -81,8 +81,8 @@ session_start();
                                     <select id="bd_type" required name="bd_type" class="form-select" autocomplete="off">
                                         <option value="">Select User Type</option>
                                         <option value="admin">Admin</option>
-                                        <option value="user">User</option>
-                                        <option value="business">Business</option>
+                                        <!--<option value="user">User</option>-->
+                                        <option value="business">User</option>
                                     </select>
                                 </div>
                                 <div class="mb-4">

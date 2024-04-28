@@ -3,6 +3,8 @@ $ac = 9;
 include './validation.php';
 if (isset($_REQUEST['id']))
     $_SESSION['ub_id'] = $_REQUEST['id'];
+if (!isset($_REQUEST['id']) && $_SESSION['type'] == 'business')
+    header('location:user-authentication.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,10 +104,12 @@ if (isset($_REQUEST['id']))
                                     <div class="row"> 
                                         <div class="col-sm-6">
                                             <div class="row">
-                                                <div class="col-sm-12 mt-2">
-                                                    <label for="ub_website_url" class="form-label">Business Website URL</label>
-                                                    <input readonly type="text" class="form-control" id="ub_website_url" name="ub_website_url" value="http://user.bizzata.in/<?= isset($_REQUEST['id']) ? $cu_rec['ub_id'] : "" ?>">                                            
-                                                </div> 
+                                                <?php if (isset($_REQUEST['id'])) { ?>
+                                                    <div class="col-sm-12 mt-2">
+                                                        <label for="ub_website_url" class="form-label">Business Website URL</label>
+                                                        <input readonly type="text" class="form-control" id="ub_website_url" name="ub_website_url" value="http://localhost:3000/business/<?= isset($_REQUEST['id']) ? $cu_rec['ub_id'] : "" ?>">                                            
+                                                    </div> 
+                                                <?php } ?>
                                                 <div class="col-sm-12 mt-2">
                                                     <label for="ub_business_name" class="form-label">Business Name</label>
                                                     <input type="text" class="form-control" id="ub_business_name" name="ub_business_name" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_business_name'] : "" ?>">                                            
@@ -160,11 +164,11 @@ if (isset($_REQUEST['id']))
                                                     <div class="row">
                                                         <div class="col-sm-12 mt-2">
                                                             <label for="ub_whatsapp_number" class="form-label">Business Whatsapp Number</label>
-                                                            <input type="number" class="form-control" id="ub_whatsapp_number" name="ub_whatsapp_number" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_whatsapp_number'] : "" ?>">                                            
+                                                            <input type="number" class="form-control" id="ub_whatsapp_number"  onkeypress="return isNumberKeyByGAP(event, this, 10);" onchange="checkValueInTable('tb_user_business', 'ub_whatsapp_number', this);" name="ub_whatsapp_number" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_whatsapp_number'] : "" ?>">                                            
                                                         </div> 
                                                         <div class="col-sm-12 mt-2">
                                                             <label for="ub_alternate_number" class="form-label">Alternate Number</label>
-                                                            <input type="number" class="form-control" id="ub_alternate_number" name="ub_alternate_number" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_alternate_number'] : "" ?>">                                            
+                                                            <input type="number" class="form-control" id="ub_alternate_number" name="ub_alternate_number"  onkeypress="return isNumberKeyByGAP(event, this, 10);" onchange="checkValueInTable('tb_user_business', 'ub_alternate_number', this);" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_alternate_number'] : "" ?>">                                            
                                                         </div> 
                                                     </div>
                                                 </div>
@@ -174,7 +178,7 @@ if (isset($_REQUEST['id']))
                                     <div class="row">     
                                         <div class="col-sm-4 mt-2">
                                             <label for="ub_email" class="form-label">Business E-Mail</label>
-                                            <input required type="email" class="form-control" id="ub_email" name="ub_email" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_email'] : "" ?>">                                            
+                                            <input required type="email" class="form-control" id="ub_email" name="ub_email" onchange="checkValueInTable('tb_user_business', 'ub_email', this);" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_email'] : "" ?>">                                            
                                         </div> 
                                         <?php if (!isset($_REQUEST['id'])) { ?>
                                             <div class="col-sm-4 mt-2">
@@ -237,8 +241,7 @@ if (isset($_REQUEST['id']))
                                         </div>
                                     </div><br/>
                                     <div class="d-flex justify-content-end gap-3">                               
-
-                                        <button type="submit" class="btn btn-primary btn-sm" name="user_business_<?= isset($_REQUEST['id']) ? "update" : "save" ?>" id="user_business_<?= isset($_REQUEST['id']) ? "update" : "save" ?>" value="user_business_<?= isset($_REQUEST['id']) ? "update" : "save" ?>"><?= isset($_REQUEST['id']) ? "Update" : "Save" ?></button>
+                                        <button type="submit" class="btn btn-primary btn-sm" name="user_business_update" id="user_business_update" value="user_business_update">Update</button>
                                         <button type="reset" class="btn btn-primary btn-sm"  name="user_business_reset" id="user_business_reset" value="user_business_reset">Reset</button>
                                     </div>
                                 </form>                        
@@ -282,22 +285,23 @@ if (isset($_REQUEST['id']))
         <!-- Style Switcher JS -->
         <script src="./assets/js/styleswitcher.js"></script>
         <!-- End Style Switcher JS -->
+        <script src="custom/js/GAPjs.js" type="text/javascript"></script>
         <script>
-                                                        function previewImage(event, id) {
-                                                            const file = event.target.files[0];
-                                                            const reader = new FileReader();
-                                                            reader.onload = function (event) {
-                                                                const imgElement = document.getElementById(id);
-                                                                imgElement.src = event.target.result;
-                                                            }
+                                                function previewImage(event, id) {
+                                                    const file = event.target.files[0];
+                                                    const reader = new FileReader();
+                                                    reader.onload = function (event) {
+                                                        const imgElement = document.getElementById(id);
+                                                        imgElement.src = event.target.result;
+                                                    }
 
-                                                            reader.readAsDataURL(file);
-                                                        }
+                                                    reader.readAsDataURL(file);
+                                                }
 
-                                                        function resetFileInput(id) {
-                                                            document.getElementById(id).value = '';
-                                                            document.getElementById(id).src = './assets/img/user.png';
-                                                        }
+                                                function resetFileInput(id) {
+                                                    document.getElementById(id).value = '';
+                                                    document.getElementById(id).src = './assets/img/user.png';
+                                                }
 
 
         </script>
