@@ -107,7 +107,7 @@ if (!isset($_REQUEST['id']) && $_SESSION['type'] == 'business')
                                                 <?php if (isset($_REQUEST['id'])) { ?>
                                                     <div class="col-sm-12 mt-2">
                                                         <label for="ub_website_url" class="form-label">Business Website URL</label>
-                                                        <input readonly type="text" class="form-control" id="ub_website_url" name="ub_website_url" value="http://localhost:3000/business/<?= isset($_REQUEST['id']) ? $cu_rec['ub_id'] : "" ?>">                                            
+                                                        <input readonly type="text" class="form-control" id="ub_website_url" name="ub_website_url" value="<?= isset($_REQUEST['id']) ? $cu_rec['ub_website_url'] : "" ?>">                                            
                                                     </div> 
                                                 <?php } ?>
                                                 <div class="col-sm-12 mt-2">

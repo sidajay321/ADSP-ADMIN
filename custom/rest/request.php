@@ -156,8 +156,8 @@ if (isset($_REQUEST['login_request'])) {
             if ($ui == $re_th['ub_email'] && $pass == $re_th['ub_password']) {
                 $_SESSION['tl_userid'] = $re_th['ub_id'];
                 $_SESSION['type'] = 'business';
-                $_SESSION['tl_username'] = $re_th['ub_first_name'];
-                $_SESSION['tl_name'] = $re_th['ub_first_name'] . " " . $re_th['ub_last_name'];
+                $_SESSION['tl_username'] = $re_th['ub_business_name'];
+                $_SESSION['tl_name'] = $re_th['ub_business_name'];
                 $_SESSION['tl_status'] = $re_th['ub_active'];
                 $_SESSION['us_profile_photo'] = $re_th['ub_logo'];
                 $_SESSION['ub_id'] = $re_th['ub_id'];
@@ -367,7 +367,7 @@ if (isset($_REQUEST['login_request'])) {
         extract($_POST);
 
         $bd_id = generateID("tb_business_details", "bd_id", $conn);
-        $businessID = "BI{$bd_id}BN{$bd_city}{$bd_category}";
+        $businessID = str_replace(' ', '', $bd_business_name);
         $fieldsNames = "`bd_user_id`,`bd_business_name`,`bd_business_id`,`bd_url`,`bd_city`,`bd_category`,`bd_meta_title`,`bd_meta_keywords`,`bd_meta_description`,`bd_added_date`";
         $fieldValue = "'{$_SESSION['tl_userid']}','$bd_business_name','$businessID','$bd_url','$bd_city','$bd_category','$bd_meta_title','$bd_meta_keywords','$bd_meta_description','$date'";
 
@@ -379,8 +379,8 @@ if (isset($_REQUEST['login_request'])) {
             $ub_cover_result = uploadFile("ub_cover_image", "../../assets/uploads/", 'ub_cover_image' . $ub_id);
 
 
-        $fieldsNames1 = "`ub_id`, `ub_us_id`, `ub_business_name`, `ub_logo`, `ub_cover_image`, `ub_description`, `ub_whatsapp_number`, `ub_alternate_number`, `ub_email`,`ub_password`, `ub_address`, `ub_zipcode`, `ub_alternate_email`, `ub_state`, `ub_language`, `ub_google_map_url`, `ub_district`, `ub_business_segment`, `ub_active`, `ub_added_on`";
-        $fieldValue1 = "'$ub_id', '$bd_id', '$bd_business_name', '$ub_logo_result', '$ub_cover_result', '$ub_description', '$ub_whatsapp_number','$ub_alternate_number', '$ub_email','$ub_password', '$ub_address', '$ub_zipcode','$ub_alternate_email','$ub_state','$ub_language','$ub_google_map_url','$ub_district','$ub_business_segment', 'a', '$date'";
+        $fieldsNames1 = "`ub_id`, `ub_us_id`, `ub_website_url`,`ub_business_name`, `ub_logo`, `ub_cover_image`, `ub_description`, `ub_whatsapp_number`, `ub_alternate_number`, `ub_email`,`ub_password`, `ub_address`, `ub_zipcode`, `ub_alternate_email`, `ub_state`, `ub_language`, `ub_google_map_url`, `ub_district`, `ub_business_segment`, `ub_active`, `ub_added_on`";
+        $fieldValue1 = "'$ub_id', '$bd_id',$bd_url, '$bd_business_name', '$ub_logo_result', '$ub_cover_result', '$ub_description', '$ub_whatsapp_number','$ub_alternate_number', '$ub_email','$ub_password', '$ub_address', '$ub_zipcode','$ub_alternate_email','$ub_state','$ub_language','$ub_google_map_url','$ub_district','$ub_business_segment', 'a', '$date'";
 
         $conn->insertDataInTable("tb_user_business", $fieldsNames1, $fieldValue1);
 
@@ -583,7 +583,7 @@ if (isset($_REQUEST['login_request'])) {
 
         if ($conn->updateDataInTable("tb_user_business", $setValue, $condition)) {
             $_SESSION['msg'] = "Business Data Update";
-            header("location:../../social-media.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../user-business-details?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../user-business-details.php");
@@ -600,7 +600,7 @@ if (isset($_REQUEST['login_request'])) {
         $condition = "WHERE `tb_user_business`.`ub_id` = " . $_REQUEST['ub_id'];
         if ($conn->updateDataInTable("tb_user_business", $setValue, $condition)) {
             $_SESSION['msg'] = "Social Media Data Saved";
-            header("location:../../business-product.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../social-media.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../social-media.php");
@@ -619,7 +619,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bp_id', '{$_REQUEST['ub_id']}','$bp_image', '$bp_name', '$bp_description', '$bp_price', '$date'";
         if ($conn->insertDataInTable("tb_business_product", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Product Data Saved";
-            header("location:../../business-hours.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-product.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-product.php");
@@ -653,7 +653,7 @@ if (isset($_REQUEST['login_request'])) {
                     $conn->insertDataInTable("tb_business_hours", $fieldsNames, $fieldValue);
                 }
                 $_SESSION['msg'] = "Schedule data saved successfully.";
-                header("location:../../business-appointments.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+                header("location:../../business-hours.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
             } catch (Exception $e) {
                 $_SESSION['msg'] = $e->getMessage();
                 header("location:../../business-hours.php");
@@ -691,7 +691,7 @@ if (isset($_REQUEST['login_request'])) {
                     $conn->insertDataInTable("tb_business_appointments", $fieldsNames, $fieldValue);
                 }
                 $_SESSION['msg'] = "Appointments data saved successfully.";
-                header("location:../../business-gallery.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+                header("location:../../business-appointments.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
             } catch (Exception $e) {
                 $_SESSION['msg'] = $e->getMessage();
                 header("location:../../business-appointments.php");
@@ -714,7 +714,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bg_id', '{$_REQUEST['ub_id']}','$bg_image', '$bg_product_type', '$bg_product_url', '$date'";
         if ($conn->insertDataInTable("tb_business_gallery", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Gallery Data Saved";
-            header("location:../../business-services.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-gallery.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-gallery.php");
@@ -731,7 +731,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bo_id', '{$_REQUEST['ub_id']}', '$bo_offers', '$date'";
         if ($conn->insertDataInTable("tb_business_offers", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Offers Data Saved";
-            header("location:../../business-certificate.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-offers.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-offers.php");
@@ -750,7 +750,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bs_id', '{$_REQUEST['ub_id']}', '$bs_service_name','$bs_image', '$bs_service_description', '$date'";
         if ($conn->insertDataInTable("tb_business_services", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Service Data Saved";
-            header("location:../../business-offers.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-services.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-services.php");
@@ -772,7 +772,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bce_id', '{$_REQUEST['ub_id']}', '$bce_name', '$bce_image', '$date'";
         if ($conn->insertDataInTable("tb_business_certicate", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Certificate Data Saved";
-            header("location:../../business-payment-method.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-certificate.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-certificate.php");
@@ -791,7 +791,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bpa_id', '{$_REQUEST['ub_id']}', '$bpa_method_name', '$bpa_method_image', '$date'";
         if ($conn->insertDataInTable("tb_business_payment", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Payment Data Saved";
-            header("location:../../business-seo.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-payment-method.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-payment-method.php");
@@ -808,7 +808,7 @@ if (isset($_REQUEST['login_request'])) {
 
         if ($conn->updateDataInTable("tb_user_business", $setValue, $condition)) {
             $_SESSION['msg'] = "Business SEO Data Saved";
-            header("location:../../business-blogs.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-seo.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-seo.php");
@@ -827,7 +827,7 @@ if (isset($_REQUEST['login_request'])) {
         $fieldValue = "'$bb_id', '{$_REQUEST['ub_id']}', '$bb_blog_title', '$bb_blog_description','$bb_blog_image', '$date'";
         if ($conn->insertDataInTable("tb_business_blog", $fieldsNames, $fieldValue)) {
             $_SESSION['msg'] = "Business Blog Data Saved";
-            header("location:../../business-privacy-policy.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-blogs.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-blogs.php");
@@ -844,7 +844,7 @@ if (isset($_REQUEST['login_request'])) {
 
         if ($conn->updateDataInTable("tb_user_business", $setValue, $condition)) {
             $_SESSION['msg'] = "Business Data Saved";
-            header("location:../../business-terms-condition.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
+            header("location:../../business-privacy-policy.php?id=" . $conn->encrypt_decrypt($_REQUEST['ub_id'], 'encrypt'));
         } else {
             $_SESSION['msg'] = "Problem in saving data!";
             header("location:../../business-privacy-policy.php");

@@ -345,20 +345,20 @@ function loadMenuPageInDivByGAP($parent, $page)
     });
 }
 
-function checkValueInTable(tbName, fieldName, field) {
+function checkValueInTable(tbName, fieldName, field, special = false) {
+    const valueToCheck = special ? field.value.trim().replace(/\s+/g, '') : field.value;
     const retCon = $.ajax({
         url: './custom/rest/request.php',
         type: 'POST',
-        data: {check_code: 'true', tb_name: tbName, field_name: fieldName, field_value: field.value},
+        data: {check_code: 'true', tb_name: tbName, field_name: fieldName, field_value: valueToCheck},
         async: false
     }).responseText;
-    if (retCon)
-    {
-        alert('This value already exits!');
+
+    if (retCon) {
+        alert('This value already exists!');
         field.value = "";
         field.focus();
-    }
-
+}
 }
 /*Code For Date validation
  * var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;

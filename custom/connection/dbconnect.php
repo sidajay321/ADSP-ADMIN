@@ -70,7 +70,7 @@ class Connection {
         if ($this->link != NULL) {
             try {
                 $query = "UPDATE " . $tbName . " SET " . $setValue . " " . $condition;
-                echo $query;
+//                echo $query;
                 $stmt = $this->link->prepare($query);
                 $stmt->execute();
 

@@ -73,7 +73,7 @@ include './validation.php';
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-no-gutter">
                                     <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
-                                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">City</a></li>
+                                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="./city.php">City</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Add</li>
                                 </ol>
                             </nav>
@@ -208,7 +208,7 @@ include './validation.php';
                                         var $retCom = $.ajax({
                                             url: './custom/rest/request.php',
                                             type: 'POST',
-                                            data: {add_city: 'true', bc_name: $("#bc_name").val(), bc_id: $("#bc_id").val()},
+                                            data: {add_city: 'true', bc_name: $("#bc_name").val(), bc_id: $("#bc_id").val() ? $("#bc_id").val() : undefined},
                                             async: false
                                         }).responseText;
                                         $obj = JSON.parse($retCom);

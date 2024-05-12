@@ -88,7 +88,7 @@ if (isset($_REQUEST['id']))
                                     <thead class="thead-light">
                                         <tr>                                    
                                             <th>Sr.No.</th>
-                                            <th>Business Icon</th>
+                                            <th>Blog Image</th>
                                             <th>Blogs Title</th>
                                             <th>Blogs Description</th>                                         
                                             <th>Action</th>
@@ -106,10 +106,9 @@ if (isset($_REQUEST['id']))
                                             ?>
                                             <tr>
                                                 <td><?= $i + 1 ?></td>
-                                                <td><img height="50" class="rounded-circle" src="./assets/uploads/<?= $_SESSION['us_profile_photo'] ?>" alt="Image Description"></td>
-                                                <td><?= $cr['bb_blog_title'] ?></td>
-                                                <td><?= $cr['bb_blog_description'] ?></td>
                                                 <td><img height="50" class="rounded-circle" src="./assets/uploads/<?= $cr['bb_blog_image'] ?>" alt="Image Description"></td>
+                                                <td><?= $cr['bb_blog_title'] ?></td>
+                                                <td><?= $cr['bb_blog_description'] ?></td>                                                
                                                 <td>                                            
                                                     <a href="#?id=<?= $cr['bb_id'] ?>&action=edit"><i class="bi bi-pencil-square"></i></a>
                                                     <a href="#?id=<?= $cr['bb_id'] ?>&action=delete_buisness_details"><i class="bi bi-eye-fill"></i></a>
@@ -205,109 +204,7 @@ if (isset($_REQUEST['id']))
                                                     document.getElementById('upload-image-preview').src = './assets/img/placehoder1.jpg';
                                                 }
 
-                                                var bcArr = [];
-<?php
-if (isset($_REQUEST['id'])) {
-    echo "var bd_city=" . $cu_si['bd_city'] . ";";
-    echo "var bd_category=" . $cu_si['bd_category'] . ";";
-    echo "bcArr=" . json_encode($bcArr) . ";";
-}
-?>
-                                                if (typeof bd_category === 'number') {
-                                                    fetchSubCategory(bd_category);
-                                                }
-                                                function fetchCity() {
-                                                    var $retCom = $.ajax({
-                                                        url: './custom/rest/request.php',
-                                                        type: 'POST',
-                                                        data: {fetch_city: 'true'},
-                                                        async: false
-                                                    }).responseText;
-                                                    $obj = JSON.parse($retCom);
-                                                    $city = "";
-                                                    $cityTable = "";
-                                                    $obj.forEach(function (e, i) {
-                                                        if (bd_city)
-                                                            $city += `<option ${bd_city == e.bc_id ? "selected" : ""} value='${e.bc_id}'>${e.bc_name}</option>`;
-                                                        else
-                                                            $city += `<option value='${e.bc_id}'>${e.bc_name}</option>`;
-                                                        $cityTable += `<tr>
-                                                    <td>${i + 1}</td>
-                                                    <td>${e.bc_name}</td>
-                                                    <td>                                            
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        <i class="bi bi-trash"></i>
-                                                    </td>
-                                                </tr>`;
-                                                    });
-                                                    $("#cityTable").html($cityTable);
-                                                    $("#bd_city").html("<option value=''>Select City</option>" + $city);
-                                                }
 
-                                                function fetchCategory() {
-                                                    var $retCom = $.ajax({
-                                                        url: './custom/rest/request.php',
-                                                        type: 'POST',
-                                                        data: {fetch_category: 'true'},
-                                                        async: false
-                                                    }).responseText;
-                                                    $obj = JSON.parse($retCom);
-                                                    $cat = "";
-                                                    $catTable = "";
-                                                    $obj.forEach(function (e, i) {
-                                                        if (bd_category)
-                                                            $cat += `<option ${bd_category == e.ca_id ? "selected" : ""} value='${e.ca_id}'>${e.ca_name}</option>`;
-                                                        else
-                                                            $cat += `<option value='${e.ca_id}'>${e.ca_name}</option>`;
-                                                        $catTable += `<tr>
-                                                    <td>${i + 1}</td>
-                                                    <td>${e.ca_name}</td>
-                                                    <td>                                            
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        <i class="bi bi-trash"></i>
-                                                    </td>
-                                                </tr>`;
-                                                    });
-                                                    $("#bd_category").html("<option value=''>Select Category</option>" + $cat);
-                                                    $("#catTable").html($catTable);
-                                                }
-
-                                                function fetchSubCategory(bd_category) {
-                                                    console.log(bcArr, "sub category");
-                                                    var $retCom = $.ajax({
-                                                        url: './custom/rest/request.php',
-                                                        type: 'POST',
-                                                        data: {fetch_sub_category: 'true', bd_category: bd_category},
-                                                        async: false
-                                                    }).responseText;
-                                                    $obj = JSON.parse($retCom);
-                                                    $subcat = "";
-                                                    $obj.forEach(function (e) {
-                                                        var selected = bcArr.includes(e.ca_id) ? 'selected' : '';
-                                                        $subcat += `<option  ${selected} value='${e.ca_id}'>${e.ca_name}</option>`;
-                                                    });
-                                                    $("#bd_sub_category").html("<option value=''>Select Sub Category</option>" + $subcat);
-                                                }
-                                                $(document).ready(function () {
-                                                    $('.js-example-basic-multiple').select2();
-                                                    fetchCategory();
-                                                    fetchCity();
-                                                    var $retState = $.ajax({
-                                                        url: './custom/rest/request.php',
-                                                        type: 'POST',
-                                                        data: {fetch_state: 'true'},
-                                                        async: false
-                                                    }).responseText;
-
-                                                    $obj = JSON.parse($retState);
-                                                    $state = "";
-
-                                                    $obj.forEach(function (e) {
-                                                        $state += `<option value='${e.id}'>${e.name}</option>`;
-                                                    });
-                                                    $("#bd_state").html("<option value=''>Select State</option>" + $state);
-
-                                                });
 
         </script>
         <script>

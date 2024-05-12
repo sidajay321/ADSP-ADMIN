@@ -124,13 +124,13 @@ if (isset($_REQUEST['id']))
                                                     <td><label class="form-label"> <input value="a" name="ub_wednesday_time_active" type="checkbox" class="form-check-input"/> Wednesday</label></td>
                                                     <td>
                                                         <select id="ub_wednesday_start_time" name="ub_wednesday_start_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                     <td class="text-center">to</td>
                                                     <td>
                                                         <select id="ub_wednesday_end_time" name="ub_wednesday_end_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -138,13 +138,13 @@ if (isset($_REQUEST['id']))
                                                     <td><label class="form-label"> <input value="a" name="ub_thursday_time_active" type="checkbox" class="form-check-input"/> Thursday</label></td>
                                                     <td>
                                                         <select id="ub_thursday_start_time" name="ub_thursday_start_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                     <td class="text-center">to</td>
                                                     <td>
                                                         <select id="ub_thursday_end_time" name="ub_thursday_end_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -152,13 +152,13 @@ if (isset($_REQUEST['id']))
                                                     <td><label class="form-label"> <input value="a" name="ub_friday_time_active" type="checkbox" class="form-check-input"/> Friday</label></td>
                                                     <td>
                                                         <select id="ub_friday_start_time" name="ub_friday_start_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                     <td class="text-center">to</td>
                                                     <td>
                                                         <select id="ub_friday_end_time" name="ub_friday_end_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -166,13 +166,13 @@ if (isset($_REQUEST['id']))
                                                     <td><label class="form-label"> <input value="a" name="ub_saturday_time_active" type="checkbox" class="form-check-input"/> Saturday</label></td>
                                                     <td>
                                                         <select id="ub_saturday_start_time" name="ub_saturday_start_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                     <td class="text-center">to</td>
                                                     <td>
                                                         <select id="ub_saturday_end_time" name="ub_saturday_end_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -180,13 +180,13 @@ if (isset($_REQUEST['id']))
                                                     <td><label class="form-label"> <input value="a" name="ub_sunday_time_active" type="checkbox" class="form-check-input"/> Sunday</label></td>
                                                     <td>
                                                         <select id="ub_sunday_start_time" name="ub_sunday_start_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                     <td class="text-center">to</td>
                                                     <td>
                                                         <select id="ub_sunday_end_time" name="ub_sunday_end_time" class="form-select" autocomplete="off">
-                                                            <option value="">12:00AM</option>
+                                                            <option value="12:00AM">12:00AM</option>
                                                         </select>
                                                     </td>
                                                 </tr>

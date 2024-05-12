@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 28, 2024 at 04:46 AM
+-- Generation Time: May 12, 2024 at 04:30 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -56,15 +56,16 @@ CREATE TABLE IF NOT EXISTS `tb_buisness_cities` (
   `bc_added_date` varchar(50) DEFAULT NULL,
   `bc_status` enum('a','d') NOT NULL DEFAULT 'a',
   PRIMARY KEY (`bc_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tb_buisness_cities`
 --
 
 INSERT INTO `tb_buisness_cities` (`bc_id`, `bc_name`, `bc_added_date`, `bc_status`) VALUES
-(2, 'gaya', NULL, 'a'),
-(3, 'patna', NULL, 'a'),
+(6, 'patna1', NULL, 'a'),
+(2, 'gaya1', NULL, 'a'),
+(3, 'bihar', NULL, 'a'),
 (4, 'danapur', NULL, 'a'),
 (5, 'Purina', NULL, 'a');
 
@@ -101,7 +102,14 @@ CREATE TABLE IF NOT EXISTS `tb_business_blog` (
   `bb_blog_image` varchar(100) DEFAULT NULL,
   `bb_added_on` varchar(50) NOT NULL,
   PRIMARY KEY (`bb_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_business_blog`
+--
+
+INSERT INTO `tb_business_blog` (`bb_id`, `bb_ub_id`, `bb_blog_title`, `bb_blog_description`, `bb_blog_image`, `bb_added_on`) VALUES
+(1, 1, 'blog title', 'blog description', 'business_blog_1.png', '2024-05-12 14:34:46');
 
 -- --------------------------------------------------------
 
@@ -147,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `tb_business_details` (
 --
 
 INSERT INTO `tb_business_details` (`bd_id`, `bd_user_id`, `bd_business_name`, `bd_business_id`, `bd_url`, `bd_city`, `bd_category`, `bd_meta_title`, `bd_meta_keywords`, `bd_meta_description`, `bd_added_date`, `bd_status`) VALUES
-(1, 1, 'hailey', 'BI1BN31', 'https://hailey.com/', 3, 1, 'cloth title', 'cloth Keywords', 'hjgvgvvhvh', '2024-04-26 22:09:39', 'a');
+(1, 1, 'hailey mart', 'haileymart', 'https://bizzata.in/business/haileymart', 3, 1, 'cloth title', 'cloth Keywords', 'hjgvgvvhvh', '2024-04-26 22:09:39', 'a');
 
 -- --------------------------------------------------------
 
@@ -197,7 +205,16 @@ CREATE TABLE IF NOT EXISTS `tb_business_gallery` (
   `bg_product_url` varchar(500) DEFAULT NULL,
   `bg_added_on` varchar(50) NOT NULL,
   PRIMARY KEY (`bg_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_business_gallery`
+--
+
+INSERT INTO `tb_business_gallery` (`bg_id`, `bg_ub_id`, `bg_image`, `bg_product_type`, `bg_product_url`, `bg_added_on`) VALUES
+(1, 1, 'business_gallery1.png', '', '', '2024-05-10 23:01:58'),
+(2, 1, 'business_gallery2.png', '', '', '2024-05-10 23:02:13'),
+(3, 1, 'business_gallery3.jpg', '', '', '2024-05-10 23:05:55');
 
 -- --------------------------------------------------------
 
@@ -215,7 +232,20 @@ CREATE TABLE IF NOT EXISTS `tb_business_hours` (
   `bh_end_time` varchar(20) NOT NULL,
   `bh_added_on` varchar(50) NOT NULL,
   PRIMARY KEY (`bh_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_business_hours`
+--
+
+INSERT INTO `tb_business_hours` (`bh_id`, `bh_ub_id`, `bh_day`, `bh_active`, `bh_start_time`, `bh_end_time`, `bh_added_on`) VALUES
+(1, 1, 'monday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07'),
+(2, 1, 'tuesday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07'),
+(3, 1, 'wednesday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07'),
+(4, 1, 'thursday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07'),
+(5, 1, 'friday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07'),
+(6, 1, 'saturday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07'),
+(7, 1, 'sunday', 'a', '12:00 AM', '12:00 AM', '2024-05-12 14:29:07');
 
 -- --------------------------------------------------------
 
@@ -246,7 +276,14 @@ CREATE TABLE IF NOT EXISTS `tb_business_payment` (
   `bpa_method_image` varchar(100) NOT NULL,
   `bpa_added_on` varchar(50) NOT NULL,
   PRIMARY KEY (`bpa_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_business_payment`
+--
+
+INSERT INTO `tb_business_payment` (`bpa_id`, `bpa_ub_id`, `bpa_method_name`, `bpa_method_image`, `bpa_added_on`) VALUES
+(1, 1, 'paytm', 'business_payment_1.jpeg', '2024-05-12 18:51:56');
 
 -- --------------------------------------------------------
 
@@ -264,7 +301,16 @@ CREATE TABLE IF NOT EXISTS `tb_business_product` (
   `bp_price` varchar(100) DEFAULT NULL,
   `bp_added_on` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`bp_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_business_product`
+--
+
+INSERT INTO `tb_business_product` (`bp_id`, `bp_ub_id`, `bp_image`, `bp_name`, `bp_description`, `bp_price`, `bp_added_on`) VALUES
+(1, 1, 'business_product1.jpg', 'product', 'product description', '879879', '2024-05-10 23:00:35'),
+(2, 1, 'business_product2.png', 'product', 'product description', '879879', '2024-05-10 23:01:24'),
+(3, 1, 'business_product3.jpg', 'product2', 'produc2t description', '345', '2024-05-12 14:20:52');
 
 -- --------------------------------------------------------
 
@@ -281,7 +327,15 @@ CREATE TABLE IF NOT EXISTS `tb_business_services` (
   `bs_service_description` varchar(200) NOT NULL,
   `bs_added_on` varchar(50) NOT NULL,
   PRIMARY KEY (`bs_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_business_services`
+--
+
+INSERT INTO `tb_business_services` (`bs_id`, `bs_ub_id`, `bs_service_name`, `bs_image`, `bs_service_description`, `bs_added_on`) VALUES
+(1, 1, 'service name', 'business_service1.jpg', 'servce description', '2024-05-12 14:31:08'),
+(2, 1, 'service name 1', 'business_service2.jpeg', 'servce description 1', '2024-05-12 14:31:27');
 
 -- --------------------------------------------------------
 
@@ -1359,7 +1413,7 @@ CREATE TABLE IF NOT EXISTS `tb_user_business` (
 --
 
 INSERT INTO `tb_user_business` (`ub_id`, `ub_us_id`, `ub_website_url`, `ub_business_name`, `ub_logo`, `ub_cover_image`, `ub_business_id`, `ub_description`, `ub_first_name`, `ub_last_name`, `ub_whatsapp_number`, `ub_alternate_number`, `ub_email`, `ub_password`, `ub_address`, `ub_zipcode`, `ub_alternate_email`, `ub_state`, `ub_language`, `ub_google_map_url`, `ub_district`, `ub_business_segment`, `ub_active`, `ub_added_on`, `ub_flipkart_url`, `ub_facebook_url`, `ub_amazon_url`, `ub_instagram_url`, `ub_ebay_url`, `ub_whatsapp_url`, `ub_india_mart_url`, `ub_youtube_url`, `ub_big_basket_url`, `ub_x_url`, `ub_zomato_url`, `ub_linkedin_url`, `ub_swiggy_url`, `ub_pan_number`, `ub_gst_number`, `ub_website_title`, `ub_home_title`, `ub_meta_keyword`, `ub_meta_description`, `ub_google_analytics`, `ub_privacy_policy`, `ub_terms_condition`, `ub_template_id`) VALUES
-(1, 1, NULL, 'hailey', 'ub_logo1.jpeg', 'ub_cover_image1.jpeg', NULL, 'gvgh', NULL, NULL, '878767676', '87654456', 'hailey@123', 'RGhYWHhQNjFQSHdneUVzcWpHZkJPZz09', 'hkljlkjlj', '76767', 'hailey1@123', 'kjhkjhkjh', 'kjhkjhkjhkj', 'hkjhkjhkjh', 'kjhkjhkjhkjh', 'kjhkjhkjhkj', 'a', '2024-04-26 22:09:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 1, 'https://bizzata.in/business/haileymart', 'hailey', 'ub_logo1.jpeg', 'ub_cover_image1.jpeg', NULL, 'gvgh', NULL, NULL, '878767676', '87654456', 'hailey@123', 'RGhYWHhQNjFQSHdneUVzcWpHZkJPZz09', 'hkljlkjlj', '76767', 'hailey1@123', 'kjhkjhkjh', 'kjhkjhkjhkj', 'hkjhkjhkjh', 'kjhkjhkjhkjh', 'kjhkjhkjhkj', 'a', '2024-04-26 22:09:39', 'flipkart', 'facebook', 'amazon', 'instagram', 'ebay', 'whatsapp', 'indiamart', 'youtube', 'big', 'x', 'zomato', 'linked', 'swiggy', NULL, NULL, 'haily mart', 'haily mart home title', 'haily mart meta keyword', 'hailey mart meta description', 'google analytics', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 

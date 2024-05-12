@@ -85,8 +85,11 @@ if (isset($_REQUEST['getCategoryData'])) {
         exit;
     }
     try {
-        $businessId = $_REQUEST['businessId'];
-        $stmt = $conn->link->query("SELECT * FROM `tb_user_business` where ub_id='$businessId'");
+        $bId = $_REQUEST['businessId'];
+        $stm = $conn->link->query("SELECT * FROM tb_business_details tb JOIN tb_buisness_cities tbc ON tb.bd_city=tbc.bc_id JOIN tb_category tca ON tb.bd_category=tca.ca_id where tb.bd_business_id='$bId'");
+        $re = $stm->fetch(PDO::FETCH_ASSOC);
+        $businessId = $re ? $re['bd_id'] : "";
+        $stmt = $conn->link->query("SELECT * FROM `tb_user_business` where ub_us_id='$businessId'");
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt1 = $conn->link->query("SELECT * FROM `tb_business_blog` where bb_ub_id='$businessId'");
         $rec1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
@@ -111,7 +114,7 @@ if (isset($_REQUEST['getCategoryData'])) {
 
         if ($rec != null) {
 //            echo '{"status": true, "data":' . json_encode($rec) . ',"catData":' . json_encode($re) . '}';
-            echo '{"status":true,"businessData":' . json_encode($rec) . ',"businessBlog":' . json_encode($rec1) . ',"businessCerticate":' . json_encode($rec2) . ',"businessEnquiry":' . json_encode($rec3) . ',"businessFeedback":' . json_encode($rec4) . ',"businessGallery":' . json_encode($rec5) . ',"businessOffers":' . json_encode($rec6) . ',"businessPayment":' . json_encode($rec7) . ',"businessProduct":' . json_encode($rec8) . ',"businessServices":' . json_encode($rec9) . ',"businessHours":' . json_encode($rec10) . '}';
+            echo '{"status":true,"userData":' . json_encode($re) . ',"businessData":' . json_encode($rec) . ',"businessBlog":' . json_encode($rec1) . ',"businessCerticate":' . json_encode($rec2) . ',"businessEnquiry":' . json_encode($rec3) . ',"businessFeedback":' . json_encode($rec4) . ',"businessGallery":' . json_encode($rec5) . ',"businessOffers":' . json_encode($rec6) . ',"businessPayment":' . json_encode($rec7) . ',"businessProduct":' . json_encode($rec8) . ',"businessServices":' . json_encode($rec9) . ',"businessHours":' . json_encode($rec10) . '}';
         } else {
             echo '{"status": false, "msg": "Data not found"}';
         }

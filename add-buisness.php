@@ -158,12 +158,12 @@ include './validation.php';
                             <div class="row">     
                                 <div class="col-sm-4">
                                     <label for="bd_url" class="form-label">Business URL</label>
-                                    <input type="text" readonly class="form-control" id="bd_url" name="bd_url" aria-describedby="buisnessurl" value="https://hailey.com/">
+                                    <input type="text" readonly class="form-control" id="bd_url" name="bd_url" aria-describedby="buisnessurl"  value="<?= isset($_REQUEST['id']) ? $cu_si['bd_url'] : "https://bizzata.in/business" ?>">
                                     <div id="buisnessurl" class="form-text">Your Business URL.</div>
                                 </div> 
                                 <div class="col-sm-4">
                                     <label for="bd_business_name" class="form-label">Business Name</label>
-                                    <input type="text" required class="form-control" id="bd_business_name" name="bd_business_name" value="<?= isset($_REQUEST['id']) ? $cu_si['bd_business_name'] : "" ?>">
+                                    <input type="text" onchange="checkValueInTable('tb_business_details', 'bd_business_id', this, true);" onInput="updateBusinessURL(this.value)" required class="form-control" id="bd_business_name" name="bd_business_name" value="<?= isset($_REQUEST['id']) ? $cu_si['bd_business_name'] : "" ?>">
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="bd_city" class="form-label">City</label>
@@ -342,6 +342,11 @@ include './validation.php';
                                         }
         </script>
         <script>
+            function updateBusinessURL(name) {
+                const urlInput = document.getElementById('bd_url');
+                const baseUrl = 'https://bizzata.in/business/';
+                urlInput.value = baseUrl + name.trim().replace(/\s+/g, '');
+            }
             var bcArr = [];
 <?php
 if (isset($_REQUEST['id'])) {

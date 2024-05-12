@@ -168,10 +168,9 @@ include './validation.php';
                                         <td><?= $scd_rec['ub_whatsapp_number'] ?></td>
                                         <td style="text-transform: lowercase !important;"><?= $scd_rec['ub_email'] ?></td>
                                         <td>
-                                            <span id="passwordPlaceholder">*************</span>
-                                            <button class="btn" onmousedown="showPassword('<?= $conn->encrypt_decrypt($scd_rec['ub_password'], 'decrypt') ?>')" onmouseup="hidePassword()">
-                                                <i id="showIcon" class="bi bi-eye"></i>
-                                                <i id="hideIcon" class="bi bi-eye-slash" style="display: none;"></i>
+                                            <span class="passwordPlaceholder" data-original="<?= htmlspecialchars($conn->encrypt_decrypt($scd_rec['ub_password'], 'decrypt')) ?>">*************</span>
+                                            <button class="btn" onmousedown="showPassword(this)" onmouseup="hidePassword(this)">
+                                                <i class="bi bi-eye"></i>
                                             </button>
                                         </td>
                                         <td>                                            
@@ -239,25 +238,21 @@ include './validation.php';
         <script src="./assets/js/styleswitcher.js"></script>
         <!-- End Style Switcher JS -->
         <script>
-                                            var passwordPlaceholder = document.getElementById("passwordPlaceholder");
-                                            var originalPassword = passwordPlaceholder.textContent;
-                                            var showIcon = document.getElementById("showIcon");
-                                            var hideIcon = document.getElementById("hideIcon");
-                                            var decryptedPassword = null;
-
-                                            function showPassword(password) {
-                                                if (decryptedPassword === null) {
-                                                    decryptedPassword = password;
-                                                }
-                                                passwordPlaceholder.textContent = decryptedPassword;
-                                                showIcon.style.display = "none";
-                                                hideIcon.style.display = "inline";
+                                            function showPassword(button) {
+                                                var row = button.closest('tr'); // Find the closest row element
+                                                var passwordPlaceholder = row.querySelector('.passwordPlaceholder'); // Find the passwordPlaceholder within the row
+                                                var originalPassword = passwordPlaceholder.dataset.original; // Get the original password from data-original attribute
+                                                passwordPlaceholder.textContent = originalPassword; // Show the password
+                                                button.innerHTML = '<i class="bi bi-eye-slash"></i>'; // Change the button icon
+                                                button.setAttribute('onclick', 'hidePassword(this)'); // Change the onclick function to hidePassword
                                             }
 
-                                            function hidePassword() {
-                                                passwordPlaceholder.textContent = originalPassword;
-                                                showIcon.style.display = "inline";
-                                                hideIcon.style.display = "none";
+                                            function hidePassword(button) {
+                                                var row = button.closest('tr'); // Find the closest row element
+                                                var passwordPlaceholder = row.querySelector('.passwordPlaceholder'); // Find the passwordPlaceholder within the row
+                                                passwordPlaceholder.textContent = '*************'; // Hide the password
+                                                button.innerHTML = '<i class="bi bi-eye"></i>'; // Change the button icon
+                                                button.setAttribute('onclick', 'showPassword(this)'); // Change the onclick function to showPassword
                                             }
         </script>
     </body>
